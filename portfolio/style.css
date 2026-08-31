@@ -1,0 +1,216 @@
+/* Base Variables & Typography */
+:root {
+    --bg-color: #07101d; /* Deep space blue/black */
+    --moon-color: #e8ecf1;
+    --text-main: #ffffff;
+    --text-muted: #8892b0;
+    --accent: #ff4d4d; /* Red accent inspired by the image */
+    --cloud-color: #0a192f;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-color);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+    overflow: hidden; /* Prevents scrolling to keep it looking like a canvas */
+}
+
+/* --- Astronomy Background --- */
+.space-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Concentric Radar Rings */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+.circle-1 { width: 600px; height: 600px; }
+.circle-2 { width: 900px; height: 900px; border: 1px solid rgba(255, 255, 255, 0.08); }
+.circle-3 { width: 1200px; height: 1200px; }
+.circle-4 { width: 1600px; height: 1600px; background: radial-gradient(circle, transparent 70%, rgba(10, 25, 47, 0.5) 100%);}
+
+/* The Moon */
+.moon {
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    transform: translateY(-50%);
+    width: 450px;
+    height: 450px;
+    background-color: var(--moon-color);
+    border-radius: 50%;
+    box-shadow: 0 0 50px rgba(232, 236, 241, 0.1);
+}
+
+.crater {
+    position: absolute;
+    background-color: #d1d8e0;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+.crater-1 { width: 60px; height: 60px; top: 20%; left: 25%; }
+.crater-2 { width: 30px; height: 30px; top: 50%; left: 70%; }
+.crater-3 { width: 90px; height: 90px; bottom: 15%; left: 40%; }
+
+/* Flat Clouds Cutting Across the Moon */
+.cloud {
+    position: absolute;
+    background-color: var(--bg-color); /* Same as BG to create negative space effect */
+    border-radius: 50px;
+    height: 40px;
+    right: -10%;
+    animation: float 20s infinite linear;
+}
+.cloud-1 { width: 400px; top: 35%; right: 5%; animation-duration: 25s; }
+.cloud-2 { width: 250px; top: 45%; right: 25%; background-color: var(--cloud-color); animation-duration: 18s; }
+.cloud-3 { width: 500px; top: 60%; right: 10%; animation-duration: 30s; }
+.cloud-4 { width: 300px; top: 75%; right: 30%; background-color: var(--cloud-color); animation-duration: 22s; }
+.cloud-5 { width: 200px; top: 20%; right: 20%; animation-duration: 15s; }
+
+@keyframes float {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-40px); }
+    100% { transform: translateX(0); }
+}
+
+/* --- Main Content Layout --- */
+.content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    padding-left: 12%;
+    max-width: 600px;
+}
+
+/* Typography */
+.title {
+    font-size: 5rem;
+    font-weight: 800;
+    letter-spacing: 5px;
+    line-height: 1.1;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 0px 4px 20px rgba(0,0,0,0.5);
+}
+
+.divider {
+    width: 60px;
+    height: 4px;
+    background-color: var(--accent);
+    margin: 20px 0;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    background-color: rgba(255, 255, 255, 0.05);
+    display: inline-block;
+    padding: 10px 15px;
+    border-left: 3px solid var(--accent);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.tab-btn:hover {
+    color: var(--text-main);
+}
+
+.tab-btn.active {
+    color: var(--text-main);
+    border-bottom: 2px solid var(--accent);
+}
+
+/* Tab Content */
+.tab-content {
+    min-height: 200px;
+    background: rgba(10, 25, 47, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.tab-pane h2 {
+    margin-top: 0;
+    font-size: 1.8rem;
+    color: var(--accent);
+}
+
+.tab-pane p {
+    line-height: 1.6;
+    color: #b0b8c8;
+}
+
+.skill-list li {
+    margin-bottom: 10px;
+    color: #b0b8c8;
+}
+
+.project-card {
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border-left: 2px solid var(--text-muted);
+}
+.project-card h3 { margin: 0 0 5px 0; font-size: 1.2rem; }
+.project-card p { margin: 0; font-size: 0.95rem; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .moon { right: -10%; opacity: 0.3; z-index: 0; }
+    .content { padding-left: 5%; z-index: 10; padding-right: 5%;}
+    .title { font-size: 3.5rem; }
+}
